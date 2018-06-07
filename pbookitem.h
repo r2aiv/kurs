@@ -34,6 +34,9 @@ class PBookItem
 	PBookItem *Insert(int Descriptor);	// Вставка после указанной записи
 	void Show();
 	void Init(char *Name,char *PhoneNumber,char *Email,char *EtcInfo);
+	
+	/***** ОПЕРАТОРЫ *****/
+	ostream& operator<<(ostream& os, const PBookItem& pi);
 };
 
 

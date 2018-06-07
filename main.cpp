@@ -17,7 +17,7 @@ int main()
 	sprintf(Tmp->Name,"Марселло");
 	sprintf(Tmp->PhoneNumber,"666-66-66");
 	sprintf(Tmp->Email,"kot@gornostay.ru");
-	sprintf(Tmp->EtcInfo,"Castration");c
+	sprintf(Tmp->EtcInfo,"Castration");
 
 	ListHead=Tmp->CreateFirst();
 	ListTail=ListHead;

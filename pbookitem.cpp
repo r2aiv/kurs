@@ -91,3 +91,12 @@ void PBookItem::Show()
 	cout << "this->Next=" << this->Next << endl;	
 }
 
+ostream& operator<<(ostream& os, const PBookItem& pi)  
+{  
+	os << "Descriptor: " << pi.Descriptor << endl;	
+	os << "Name: " << pi.Name << endl;
+	os << "Phone: " << pi.PhoneNumber << endl;
+	os << "Email: " << pi.Email << endl;
+	os << "Etc: " << pi.EtcInfo << endl;
+	return os;  
+} 

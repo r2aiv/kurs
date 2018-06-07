@@ -39,8 +39,14 @@ int main()
 	}
 
 	Tmp=Tmp->Find(ListHead,2);
-	cout << "FOUND: " << endl;
-	Tmp->Show();
+	if (Tmp != NULL) // А вдруг ничего не найдется и вернётся NULL
++	{
++		cout << "FOUND: " << endl << Tmp << endl;
++	}
++	esle
++	{
++		cout << "NOT FOUND :(" << endl;
++	}
 	
 	return 0;
 }

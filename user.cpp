@@ -1,20 +1,35 @@
 #include <iostream>
 #include <cstdio>
+#include <unistd.h>
+#include <term.h>
 #include "pbookitem.h"
 #include "user.h"
 #include "files.h"
 
+// Переменные для хранения указателей на экземпляры класса
+
 PBookItem * Temp=new PBookItem;
 PBookItem * ListHead=new PBookItem;
 PBookItem * ListTail=new PBookItem;
+
+
+// Временные переменные для хранения значений полей класса 
 
 int TempDesc=0;
 char TempName[50];
 char TempNumber[20];
 char TempEmail[50];
 char TempEtcInfo[100];
-
 int FlagBookCreated=0;
+
+/*
+ * MainMenu - Главное меню
+ * ВХОД:	параметры отсутвуют
+ * ВЫХОД:	функция ничего не возвращает
+ *
+ * Организация диалога с пользователем и главного меню
+ *
+ */
 
 void MainMenu()
 {
@@ -134,8 +149,23 @@ void MainMenu()
 	}	
 }
 
+/*
+ * AskForFieldsData()
+ * ВХОД:	параметры отсутвуют
+ * ВЫХОД:	функция ничего не возвращает
+ *
+ * Пользователю предлагается ввести с клавиатуры данные для полей класса
+ *
+ */
+
 void AskForFieldsData()
 {
+	memset((void *)TempName,0,sizeof(TempName));
+	memset((void *)TempNumber,0,sizeof(TempNumber));
+	memset((void *)TempEmail,0,sizeof(TempEmail));
+	memset((void *)TempEtcInfo,0,sizeof(TempEtcInfo));
+
+
 	cout << "Имя: "; cin >> TempName;
 	cout << "Номер телефона: "; cin >> TempNumber;
 	cout << "E-mail: "; cin >> TempEmail;
@@ -146,6 +176,15 @@ void AskForFieldsData()
 	strcpy(Temp->Email,TempEmail);
 	strcpy(Temp->EtcInfo,TempEtcInfo);
 }
+
+/*
+ * ShowAllItems()
+ * ВХОД:	параметры отсутвуют
+ * ВЫХОД:	функция ничего не возвращает
+ *
+ * Вывод всех элементов списка на экран
+ *
+ */
 
 void ShowAllItems()
 {
@@ -159,9 +198,33 @@ void ShowAllItems()
 
 }
 
+/*
+ * AddItemsToEnd()
+ * ВХОД:	параметры отсутвуют
+ * ВЫХОД:	функция ничего не возвращает
+ *
+ * Пользователь вводит данные с клавиатуры.
+ * Затем введенные данные добавляются в список
+ *
+ */
+
 void AddItemToEnd()
 {
 	AskForFieldsData();	
 	Temp->Descriptor=(ListTail->Descriptor)+1;
 	Temp->Add(&ListTail);	
 }
+
+/*
+ * ClearScreen()
+ *
+ * Очистка экрана
+ *
+ */
+
+void ClearScreen()
+{
+
+
+}
+

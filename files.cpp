@@ -10,6 +10,15 @@ extern int FlagBookCreated;
 
 FILE *WorkFile;
 
+/*
+ * ReadBookFromFile()
+ * ВХОД: 	параметры отсутвуют
+ * ВЫХОД:	функция ничего не возвращает
+ *
+ * Чтение телефонной книги из файла.
+ *
+ */
+
 void ReadBookFromFile()
 {
 	WorkFile=fopen("pbook.dat","r");
@@ -41,6 +50,14 @@ void ReadBookFromFile()
 	fclose(WorkFile);
 }
 
+/*
+ * SaveBookToFile()
+ * ВХОД:	параметры отсутвуют
+ * ВЫХОД:	функция ничего не возвращаяет
+ *
+ * Запись телефонной книги из памяти в файл
+ */
+
 void SaveBookToFile()
 {
 	WorkFile=fopen("pbook.dat","w");
@@ -48,11 +65,9 @@ void SaveBookToFile()
 	Temp=ListHead;
 	while(Temp!=0)
 	{
-		fwrite((void *)Temp,sizeof(PBookItem),1,WorkFile);
+		fwrite((void *)Temp,sizeof(PBookItem),1,WorkFile);	
 		Temp=Temp->Next;
 	}	
 	fclose(WorkFile);
-
-
 }
 

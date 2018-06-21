@@ -15,7 +15,12 @@
 using namespace std;
 
 
-// Создает корень списка и возвращает указатель на него
+/* 
+ * CreateFirst - создание корневого (первого) элемента списка.
+ * ВХОД: 	аргументы не передаются
+ * ВЫХОД:	указатель на созданный корневой элемент
+ */
+
 PBookItem * PBookItem::CreateFirst()
 {
 	PBookItem *pv=new PBookItem;
@@ -32,8 +37,14 @@ PBookItem * PBookItem::CreateFirst()
 }
 
 
-// Добавляет новый элемент в список
-void PBookItem::Add(PBookItem **pend)
+/*
+ * Add - добавление нового элемента в конец списка.
+ * ВХОД:	указатель на конечный элемент списка
+ * 		Данные полей класса (передаются через поля)
+ * ВЫХОД: 	Функция ничего не возвращает
+ */
+
+ void PBookItem::Add(PBookItem **pend)
 {
 	PBookItem *pv=new PBookItem;
 	pv->Next=NULL;
@@ -49,6 +60,17 @@ void PBookItem::Add(PBookItem **pend)
 	*pend=pv;
 }
 
+
+/*
+ * Init - заполнение полей класса через аргументы функции
+ * ВХОД:	
+ * 		Name - ФИО
+ * 		PhoneNumber - номер телефона
+ * 		Email - Адресс электронной почты
+ * 		EtcInfo - Примечания
+ * ВЫХОД:	Функция ничего не возвращает
+ */ 
+
 void PBookItem::Init(char *Name, char *PhoneNumber, char *Email, char *EtcInfo)
 {
 	strcpy(this->Name,Name);
@@ -57,6 +79,15 @@ void PBookItem::Init(char *Name, char *PhoneNumber, char *Email, char *EtcInfo)
 	strcpy(this->EtcInfo,EtcInfo);
 	
 }
+
+/*
+ * Find - Поиск элемента списка по идентификатору
+ * ВХОД:
+ * 		pbeg - указатель на корневой элемент списка
+ * 		Descriptor - идентификатор элемента, который необходимо найти
+ * ВЫХОД:	указатель на найденный элемент или NULL в случае неудачи
+ *
+ */
 
 PBookItem * PBookItem::Find(PBookItem *pbeg,int Descriptor)
 {
@@ -67,11 +98,17 @@ PBookItem * PBookItem::Find(PBookItem *pbeg,int Descriptor)
 		pv=pv->Next;
 	}
 	cout << "УКАЗАННЫЙ ИДЕНТИФИКАТОР НЕ НАЙДЕН!" << endl;
-	return pv;	
+	return NULL;	
 
 }
 
 
+/*
+ * Remove - удаление элемента из списка
+ * ВХОД:	pbeg - указатель на корневой элемент списка
+ * 		Descriptor - идентификатор элемента, который необходимо удалить
+ * ВЫХОД:	указатель на корневой элемент списка
+ */
 
 PBookItem * PBookItem::Remove(PBookItem *pBeg, int Descriptor)
 {
@@ -89,6 +126,14 @@ PBookItem * PBookItem::Remove(PBookItem *pBeg, int Descriptor)
 	delete ToRemove;
 	return pBeg;
 }
+
+/*
+ * Insert - Вставка элемента в произвольное место списка
+ * ВХОД: 	pBeg - указатель на корневой элемент списка
+ * 		Descriptor - дескриптор нового элемента
+ *		Значение полей вставляемого элемента (через поля)
+ * ВЫХОД:	Указатель на вставленный элемент
+ */
 
 PBookItem * PBookItem::Insert(PBookItem *pBeg,int Descriptor)
 {
@@ -117,6 +162,13 @@ PBookItem * PBookItem::Insert(PBookItem *pBeg,int Descriptor)
 	return ToInsert;
 }
 
+/*
+ * Show() - Вывод всех элементов списка на экран
+ * ВХОД: 	параметры не передаются
+ * ВЫХОД:	Функция ничего не возвращает
+ *
+ */
+
 void PBookItem::Show()
 {
 	cout << endl;
@@ -126,10 +178,10 @@ void PBookItem::Show()
 	cout << "Phone: " << this->PhoneNumber << endl;
 	cout << "Email: " << this->Email << endl;
 	cout << "Etc: " << this->EtcInfo << endl;
-	cout << "this->Prev=" << this->Prev << endl;
-	cout << "this=" << this << endl;
-	cout << "this->Next=" << this->Next << endl;
+	//cout << "this->Prev=" << this->Prev << endl;
+	//cout << "this=" << this << endl;
+	//cout << "this->Next=" << this->Next << endl;
 	cout << "====================================="	<< endl;
-	cout << endl;
+	
 }
 

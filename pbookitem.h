@@ -30,8 +30,8 @@ class PBookItem
 	PBookItem *CreateFirst();	// Создание корня списка
 	void Add(PBookItem **pend);		// Добавление записи
 	PBookItem *Find(PBookItem *pbeg,int Descriptor);	// Поиск по дескриптору
-	void Remove(int Descriptor);		// Удаление по ключу	
-	PBookItem *Insert(int Descriptor);	// Вставка после указанной записи
+	PBookItem * Remove(PBookItem *pBeg, int Descriptor);		// Удаление по ключу	
+	PBookItem *Insert(PBookItem *pBeg,int Descriptor);	// Вставка после указанной записи
 	void Show();
 	void Init(char *Name,char *PhoneNumber,char *Email,char *EtcInfo);
 };

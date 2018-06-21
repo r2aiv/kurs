@@ -1,0 +1,2 @@
+void SaveBookToFile();
+void ReadBookFromFile();

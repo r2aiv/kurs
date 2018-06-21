@@ -11,6 +11,7 @@
 #include <iostream>
 #include "pbookitem.h"
 
+
 using namespace std;
 
 
@@ -62,27 +63,64 @@ PBookItem * PBookItem::Find(PBookItem *pbeg,int Descriptor)
 	PBookItem *pv=pbeg;
 	while(pv)
 	{
-		if(pv->Descriptor==Descriptor) break;
+		if(pv->Descriptor==Descriptor) return pv;
 		pv=pv->Next;
 	}
+	cout << "УКАЗАННЫЙ ИДЕНТИФИКАТОР НЕ НАЙДЕН!" << endl;
 	return pv;	
 
 }
 
 
 
-void PBookItem::Remove(int Descriptor)
+PBookItem * PBookItem::Remove(PBookItem *pBeg, int Descriptor)
 {
+	PBookItem *Prev;
+	PBookItem *ToRemove;
+	PBookItem *Next;
 
+	ToRemove=this->Find(pBeg,Descriptor);
+	if(ToRemove==NULL) return NULL;
+
+	Prev=ToRemove->Prev;
+	Next=ToRemove->Next;
+	Prev->Next=Next;
+	Next->Prev=Prev;
+	delete ToRemove;
+	return pBeg;
 }
 
-PBookItem * PBookItem::Insert(int Descriptor)
+PBookItem * PBookItem::Insert(PBookItem *pBeg,int Descriptor)
 {
+	PBookItem *Prev;
+	PBookItem *ToInsert=new PBookItem;
+	PBookItem *Next;
 
+	// Filling item to insert by fields of this temp item
+	ToInsert->Descriptor=this->Descriptor;
+	strcpy(ToInsert->Name,this->Name);
+	strcpy(ToInsert->PhoneNumber,this->PhoneNumber);
+	strcpy(ToInsert->Email,this->Email);
+	strcpy(ToInsert->EtcInfo,this->EtcInfo);
+
+	// Serching for item to insert after	
+	Prev=this->Find(pBeg,Descriptor);
+
+	if(Prev==NULL) return NULL;
+
+	ToInsert->Next=Prev->Next;
+	ToInsert->Prev=Prev;
+	Prev->Next=ToInsert;
+	(Prev->Next)->Prev=ToInsert;
+	Prev->Next=ToInsert;
+
+	return ToInsert;
 }
 
 void PBookItem::Show()
 {
+	cout << endl;
+	cout << "=====================================" << endl;
 	cout << "Descriptor: " << this->Descriptor << endl;	
 	cout << "Name: " << this->Name << endl;
 	cout << "Phone: " << this->PhoneNumber << endl;
@@ -90,6 +128,8 @@ void PBookItem::Show()
 	cout << "Etc: " << this->EtcInfo << endl;
 	cout << "this->Prev=" << this->Prev << endl;
 	cout << "this=" << this << endl;
-	cout << "this->Next=" << this->Next << endl;	
+	cout << "this->Next=" << this->Next << endl;
+	cout << "====================================="	<< endl;
+	cout << endl;
 }
 
